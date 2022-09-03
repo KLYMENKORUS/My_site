@@ -1,0 +1,99 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+{% block title %}Home{% endblock %}
+{% block page_header %}
+
+    {% if user.is_authenticated %}
+        <style>
+        @media(min-width: 1280px) {
+            .column {
+                float: left;
+                width: 65%;
+        }
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        </style>
+        <div class="row">
+          <div class="column">
+    <div class="jumbotron">
+        <h1 class="display-3">ItBlog</h1>
+        <p class="lead">Welcome to the IT industry blog. Choose an action below to further view the blog.</p>
+        <a class="underline-one" href="{% url 'blog:post_list' %}">Go to post view,</a>  or would you like to add your own
+        <a class="underline-one" href="{% url 'blog:new_post' %}"> post?</a>
+    </div>
+          </div>
+            <style>
+                @media(min-width: 1280px) {
+
+                    .col-lg-10 {
+                        float: right;
+
+                    }
+                }
+            </style>
+    <div class="col-md-4">
+      <div class="col-lg-10">
+    <div class="jupyter-soft-selected">
+      <h1 class="display-3">Post counter</h1>
+      <p>Published {% total_posts %} posts </p>
+        <h3>Latest posts</h3>
+          {% include 'blog/latest_posts.html' %}
+          {% show_latest_posts 3%}
+    </div>
+      </div>
+    </div>
+
+    {% else %}
+            <style>
+                @media(min-width: 1280px) {
+                    .column {
+                        float: left;
+                        width: 65%;
+                    }
+                }
+                .row:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                }
+        </style>
+        <div class="row">
+          <div class="column">
+        <div class="jumbotron">
+        <h1 class="display-3">ItBlog</h1>
+        <p class="lead">Welcome to the IT industry blog. Choose an action below to further view the blog.</p>
+            <a class="underline-one" href="{% url 'blog:post_list' %}">Click here </a>to go to the post review page
+                or <a class="underline-one" href="{% url 'users:login' %}">log in</a> to use other features
+        </div>
+    </div>
+            <style>
+                @media(min-width: 1280px) {
+
+                    .col-lg-10 {
+                        float: right;
+
+                    }
+                }
+            </style>
+    <div class="col-md-4">
+      <div class="col-lg-10">
+    <div class="jupyter-soft-selected">
+      <h1 class="display-3">Post counter</h1>
+      <p>Published {% total_posts %} posts</p>
+        <h3>Latest posts</h3>
+          {% include 'blog/latest_posts.html' %}
+          {% show_latest_posts 3%}
+    </div>
+      </div>
+    </div>
+        </div>
+        </div>
+    {% endif %}
+{% endblock page_header %}
+
+

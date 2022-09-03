@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+{% load bootstrap4 %}
+{% block title %}Edit your profile{% endblock %}
+
+{% block page_header %}
+    <h2>Edit your profile</h2>
+    <style>
+    @media(min-width: 1280px) {
+
+        .content-section {
+            padding: 30px 250px;
+            border-radius: 3px;
+            margin-bottom: 20px;
+
+        }
+
+        .account-img {
+            height: 150px;
+            width: 150px;
+            margin-right: 20px;
+            margin-bottom: 16px
+        }
+    }
+    </style>
+
+    <div class="content-section">
+      <div class="media">
+    <img class="rounded-circle account-img img-responsive thumbnail" src="{{ user.profile.get_photo_url }}" alt="img">
+{% endblock page_header %}
+
+{% block content %}
+    <div class="media-body">
+    <p>You can edit your account using the following form:</p>
+    <form action="." method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form profile_form%}
+    {% bootstrap_form user_form %}
+    {% buttons %}
+        <button class="btn btn-primary" type="submit">Save changes</button>
+    {% endbuttons %}
+    </form>
+    </div>
+    </div>
+    </div>
+{% endblock content %}

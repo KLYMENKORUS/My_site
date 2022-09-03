@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% load bootstrap4 %}
+{% block title %}Share a post{% endblock %}
+
+{% block content %}
+    {% if sent %}
+      <em><h1>E-mail successfully sent</h1></em>
+      <p>"{{ post.title }}" was successfully sent to {{ form.cleaned_data.to }}.</p>
+    {% else %}
+      <em><h1>Share "{{ post.title}}" by e-mail</h1></em>
+    <form action="." method="post">
+      {% bootstrap_form form %}
+      {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Send e-mail">
+    </form>
+
+    {% endif %}
+
+{% endblock content %}

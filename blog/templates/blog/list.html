@@ -1,0 +1,53 @@
+{%  extends 'blog/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+    {% buttons %}
+    <style>
+    h6 {
+        margin-left: 90px;
+    }
+    .account-img {
+        margin: 0 10px 0 0 ;
+        position: relative;
+        top: 25px;
+    }
+    .position-url {
+        position: relative;
+        top: 20px;
+    }
+    @media(min-width: 1280px){
+        .top-menu, .top-menu:hover, .top-menu:visited {
+            color: white;
+            float: right;
+            font-size: 10pt;
+            margin-right: -50px;
+        }
+
+    }
+    @media(min-width: 320px) {
+        .new-post {
+            color: white;
+            float: right;
+            font-size: 10pt;
+        }
+    }
+    </style>
+        <a class="btn top-menu new-post" type="submit" href="{% url 'blog:new_post' %}">
+            <img src="{% static 'images/social_media.png' %}" alt="" width="32" height="32" title="New post"></a>
+    {% endbuttons %}
+    <h1><em>Articles</em></h1>
+    {% for post in posts %}
+      <h2>
+          <img class="rounded-circle account-img img-responsive thumbnail" width="80" height="80"
+               src="{{ post.author.profile.get_photo_url }}" alt="img"><a class="position-url underline-one" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+        <em><h6 class="date" style="color: darkblue">Published {{ post.publish }} by {{ post.author }}</h6></em>
+    {{ post.body|truncatewords:30|linebreaks }}
+    {% endfor %}
+    {% include 'blog/pagination.html' with page=page_obj %}
+
+
+{% endblock content %}

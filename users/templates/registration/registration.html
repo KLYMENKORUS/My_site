@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+{% load bootstrap4 %}
+{% block title %}Sign Up{% endblock %}
+
+{% block page_header %}
+  <h2>Registration</h2>
+{% endblock page_header %}
+
+{% block content %}
+    <style>
+    form {
+        float: left;
+    }
+    </style>
+  <form method="post" action="{% url 'users:registration' %}" class="form-control-feedback">
+      {% bootstrap_form form %}
+      {% csrf_token %}
+      {% buttons %}
+        <button name="submit" class="btn btn-primary">Sign up</button>
+        <input type="hidden" name="next" value="{% url 'blog:post_list' %}" />
+      {% endbuttons %}
+
+  </form>
+
+{% endblock content %}

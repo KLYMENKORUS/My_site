@@ -1,0 +1,129 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+
+    <title>{% block title %}{% endblock %}</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 border" aria-label="Fourth navbar example">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'blog:post_index' %}">
+          <img src="{% static 'images/blog.png' %}" alt="" width="32" height="32" class="position-circle">ItBlog</a>
+      <button class="navbar-toggler toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="bg-ex-fixed"></div>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'blog:post_list' %}">
+                  <img src="{% static 'images/Articles.png' %}" alt="" width="32" height="32" class="position-circle">
+                  Articles</a></ul>
+        <ul class="navbar-nav ml-auto">
+            <style>
+                .position-circle {
+                    position: relative;
+                    right: 10px;
+                }
+                .style-dropdown {
+                    background-color: silver;
+                }
+                .position-dev {
+                    position: relative;
+                    left: 33px;
+                }
+                .position-prof {
+                    position: relative;
+                    left: 20px;
+                }
+                .position-blog {
+                    position: relative;
+                    left: 5px;
+                }
+                @media(min-width: 320px){
+                    .footer-pos {
+                        position: relative;
+                        top: 250px;
+                    }
+                    .toggler {
+                        position: relative;
+                        left: 80px;
+                    }
+                }
+                @media(min-width: 1280px) {
+                    .footer-pos1 {
+                        position: relative;
+                        top: 75px;
+                    }
+                }
+            </style>
+            {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle ml-md-4 position-circle" href="" data-toggle="dropdown" aria-expanded="false">{{ user.username }}
+                    <img class="rounded-circle img-responsive thumbnail"  height="32px" width="32px" src="{{ user.profile.get_photo_url }}" alt="img"></a>
+                    <ul class=" nav-item dropdown-menu style-dropdown">
+                        <li><hr class="dropdown-divider">Profile</li>
+                        <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{% url 'users:profile' %}">
+                            <img src="{% static 'images/profile.png' %}" alt="" width="16" height="16" class="position-circle">
+                            Your profile</a></li>
+                        <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{% url 'users:edit_profile' %}">
+                            <img src="{% static 'images/settings_user.png' %}" alt="" width="16" height="16" class="position-circle">
+                            Edit profile</a></li>
+                        <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{% url 'users:logout' %}">
+                            <img src="{% static 'images/logout.png' %}" alt="" width="16" height="16" class="position-circle">
+                            Log Out</a></li>
+                        <li><hr class="dropdown-divider">Posts</li>
+                        <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{% url 'blog:new_post' %}">
+                            <img src="{% static 'images/social_media.png' %}" alt="" width="16" height="16" class="position-circle">
+                            New post...</a></li>
+                    </ul>
+                </li>
+            {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:login' %}">
+                <img src="{% static 'images/Login.png' %}" alt="" width="32" height="32" class="position-circle">Sign in</a></li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+<main role="main" class="container">
+    <div class="pb-2 mb-2 border-bottom">
+        {% block page_header %}{% endblock page_header %}
+    </div>
+  <div>
+      {% block content %}{% endblock content %}
+  </div>
+</main>
+  <style>
+      footer {
+          margin: 0 auto;
+          text-align: center;
+          clear: both;
+      }
+  </style>
+  <footer class="pt-4 my-md-5 pt-md-5 footer-pos footer-pos1">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="{% url 'blog:post_index' %}" class="nav-link px-2 text-muted">
+            <img src="{% static 'images/home.png' %}" alt="" width="32" height="32" class="position-circle" title="Home"></a></li>
+        <li class="nav-item"><a href="{% url 'blog:post_list' %}" class="nav-link px-2 text-muted">
+            <img src="{% static 'images/footer_blog.png' %}" alt="" width="32" height="32" class="position-blog" title="Blog"></a></li>
+        <li class="nav-item"><a href="{% url 'users:profile' %}" class="nav-link px-2 text-muted">
+            <img src="{% static 'images/profile_footer.png' %}" alt="" width="32" height="32" class="position-prof" title="Profile"></a></li>
+        <li class="nav-item"><a href="https://www.instagram.com/balance_one_arm/" class="nav-link px-2 text-muted">
+            <img src="{% static 'images/developers.png' %}" alt="" width="32" height="32" class="position-dev" title="Developers"></a></li>
+    </ul>
+      <p class="text-center text-muted">© 2022 ItBlog, Inc</p>
+  </footer>
+
+</body>
+</html>

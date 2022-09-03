@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% load bootstrap4 %}
+{% block title %}Changes made{% endblock %}
+
+{% block page_header %}
+    <h2>Changes made</h2>
+{% endblock page_header %}
+
+{% block content %}
+    <h4>Your account has been successfully edited.
+        If you want to go back to view posts <a href="{% url 'blog:post_list' %}">click here</a></h4>
+{% endblock content %}

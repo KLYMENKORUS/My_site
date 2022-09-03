@@ -1,0 +1,115 @@
+{% extends 'blog/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+  {% if post.author == request.user %}
+    <style>
+    @media(min-width: 1280px) {
+        .top-menu, .top-menu:hover, .top-menu:visited {
+            color: white;
+            float: right;
+            font-size: 10pt;
+            margin-right: -50px;
+            position: relative;
+            left: 0;
+        }
+    }
+    @media(min-width: 320px) {
+        .top-menu, .top-menu:hover, .top-menu:visited {
+            color: white;
+            font-size: 10pt;
+            margin-right: -50px;
+            position: relative;
+            right: 70px;
+    }
+    }
+    </style>
+      <a class="btn btn-primary top-menu" type="submit" href="{% url 'blog:post_edit' pk=post.pk %}">Edit post</a>
+    <style>
+    .top-menu, .top-menu:hover, .top-menu:visited {
+        color: white;
+        float: right;
+        font-size: 10pt;
+        margin-right: -50px;
+        margin-left: 75px;
+    }
+    </style>
+    <a class="btn btn-danger top-menu" type="submit" href="{% url 'blog:delete_post' pk=post.pk %}">Delete post</a>
+      {% endif %}
+    <style>
+    @media(min-width: 320px) {
+        .publish-author {
+            position: relative;
+            left: 5px;
+            top: 10px;
+        }
+        .position-img {
+            position: relative;
+            top: 10px;
+        }
+        .position-title1 {
+            position: relative;
+            left: 10px;
+            top: 15px;
+        }
+    }
+       @media(min-width: 1280px) {
+           .publish {
+               position: relative;
+               left: 80px;
+               top: 0;
+           }
+           .position-img {
+               position: relative;
+               right: 10px;
+               top: 25px;
+           }
+           .position-title {
+               position: relative;
+               top: 20px;
+               left: 0;
+    }
+       }
+    </style>
+    <h1><img class="rounded-circle position-img img-responsive thumbnail" width="80" height="80"
+             src="{{ post.author.profile.get_photo_url }}" alt="img"><em class="position-title position-title1">{{ post.title }}</em></h1>
+    <em><h6 class="date publish publish-author" style="color: darkblue"> Published {{ post.publish }} by {{ post.author }}</h6></em>
+    <p>{{ post.body|linebreaks }}</p>
+    {% buttons %}
+        <a class="btn btn-primary" href="{% url 'blog:post_share' post.id %}">
+            <img src="{% static 'images/share.png' %}" alt="" width="25" height="25" class="position-circle">Share this post</a>
+    {% endbuttons %}
+
+    {% with comments.count as total_comments %}
+        <em><h2>{{ total_comments }} comment{{ total_comments|pluralize }}</h2></em>
+    {% endwith %}
+    {% for comment in comments %}
+      <div class="comment">
+        <p class="info" style="color: #00abff">
+            Comment {{ forloop.counter }} by {{ comment.name }}
+            {{ comment.created }}
+        </p>
+        {{ comment.body|linebreaks }}
+      </div>
+    {% empty %}
+        <em><p>There are no comments yet.</p></em>
+    {% endfor %}
+    {% if new_comment %}
+        <em><h2>Your comment has been added</h2></em>
+        {% else %}
+        {% if user.is_authenticated %}
+            <em><h2>Add a new comment</h2></em>
+          <form action="." method="post">
+          {% bootstrap_form comment_form %}
+              {% csrf_token %}
+              <p><input class="btn btn-primary" type="submit" value="Add comment"></p>
+          </form>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'users:login' %}">Log in to comment on a post</a>
+            {% endif %}
+    {% endif %}
+
+{% endblock content %}
