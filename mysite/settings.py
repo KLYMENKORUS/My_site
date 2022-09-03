@@ -149,26 +149,8 @@ SOCIAL_AUTH_INSTAGRAM_SECRET = 'd4a7376c50ec9b96a73d37d8f8c1703a'
 
 # Настройки Heroku
 django_heroku.settings(locals())
-if os.getcwd() == '/app':
-    import dj_database_url
-    DATABASES = {
-        'default': dj_database_url.config(default='postgres://127.0.0.1')
-    }
-    # Поддержка заголовка 'X-Forwarded-Proto' для request.is_secure().
-    SECURE_PROXY_SSL_HEADER = ('HTTp_X_FORWARDED_PHOTO', 'https')
-
-    # Разрешены все заголовки хостов.
-    ALLOWED_HOSTS = ['*']
+if os.environ.get('DEBUG') == 'TRUE':
+    DEBUG = True
+elif os.environ.get('DEBUG') == 'FALSE':
     DEBUG = False
-
-    # Конфигурация статических ресурсов
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATIC_URL = '/static/'
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
-
 
