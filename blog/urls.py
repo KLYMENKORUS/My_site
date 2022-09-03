@@ -19,6 +19,6 @@ urlpatterns = [
     # Страница редактирования поста
     path('edit/<int:pk>/post/', views.post_edit, name='post_edit'),
     # Удаление поста
-    path('delete/<int:pk>/post', views.PostDeleteView.as_view(), name='delete_post'),
+    path('delete/<int:pk>/post/', views.PostDeleteView.as_view(), name='delete_post'),
 
 ]
