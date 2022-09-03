@@ -9,7 +9,7 @@ from PIL import Image
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_of_birth = models.DateField(blank=True, null=True)
-    photo = models.ImageField(upload_to='images/', blank=True)
+    photo = models.ImageField(upload_to='images/', blank=True, help_text='Max size photo 300*300')
     about_myself = models.TextField(max_length=500, default='Bio')
 
     def __str__(self):

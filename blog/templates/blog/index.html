@@ -21,7 +21,7 @@
         <div class="row">
           <div class="column">
     <div class="jumbotron">
-        <h1 class="display-3">ItBlog</h1>
+        <h1 class="display-3 text-shadow">ItBlog</h1>
         <p class="lead">Welcome to the IT industry blog. Choose an action below to further view the blog.</p>
         <a class="underline-one" href="{% url 'blog:post_list' %}">Go to post view,</a>  or would you like to add your own
         <a class="underline-one" href="{% url 'blog:new_post' %}"> post?</a>
@@ -39,7 +39,7 @@
     <div class="col-md-4">
       <div class="col-lg-10">
     <div class="jupyter-soft-selected">
-      <h1 class="display-3">Post counter</h1>
+      <h1 class="display-3 text-shadow">Post counter</h1>
       <p>Published {% total_posts %} posts </p>
         <h3>Latest posts</h3>
           {% include 'blog/latest_posts.html' %}
@@ -65,7 +65,7 @@
         <div class="row">
           <div class="column">
         <div class="jumbotron">
-        <h1 class="display-3">ItBlog</h1>
+            <h1 class="display-3 text-shadow">ItBlog</h1>
         <p class="lead">Welcome to the IT industry blog. Choose an action below to further view the blog.</p>
             <a class="underline-one" href="{% url 'blog:post_list' %}">Click here </a>to go to the post review page
                 or <a class="underline-one" href="{% url 'users:login' %}">log in</a> to use other features
@@ -83,7 +83,7 @@
     <div class="col-md-4">
       <div class="col-lg-10">
     <div class="jupyter-soft-selected">
-      <h1 class="display-3">Post counter</h1>
+      <h1 class="display-3 text-shadow">Post counter</h1>
       <p>Published {% total_posts %} posts</p>
         <h3>Latest posts</h3>
           {% include 'blog/latest_posts.html' %}

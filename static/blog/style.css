@@ -29,6 +29,9 @@ footer {
     position: relative;
     cursor: pointer;
     text-decoration: none; /* Убираем подчеркивание */
+    -webkit-text-shadow: 8px -8px 5px rgba(0, 0, 0, 0.31);
+    -moz-text-shadow: 8px -8px 5px rgba(0, 0, 0, 0.31);
+    text-shadow: 8px -8px 5px rgba(0, 0, 0, 0.31);
 }
 .underline-one:after {
 	content: "";
@@ -52,5 +55,10 @@ footer {
     height: 2px; /* Высота линии */
     background-color: red; /* Цвет подчеркивания при появлении линии*/
     transition: width 0.7s;  /* Время эффекта */
+}
+.text-shadow {
+    -webkit-text-shadow: 8px -8px 5px rgba(0, 0, 0, 0.31);
+    -moz-text-shadow: 8px -8px 5px rgba(0, 0, 0, 0.31);
+    text-shadow: 8px -8px 5px rgba(0, 0, 0, 0.31);
 }
 
