@@ -9,32 +9,6 @@
      h4, p{
          margin: 0 0 0 10px;
     }
-         @media(min-width: 320px){
-        .account-img {
-         height: 40px;
-         width: 40px;
-         margin-right: 15px;
-         margin-bottom: 16px;
-     }
-        .media-body {
-            position: relative;
-            right: 12px;
-        }
-        .mobile {
-            position: relative;
-            top: 250px;
-            right: 260px;
-        }
-        .name-pos {
-          border: 1px solid #dddddd;
-          background-color: #efefef;
-          border-radius: 5px;
-          width: 100%;
-          height: 30px;
-          margin-right: 100px;
-      }
-
-    }
      @media(min-width: 1280px) {
          .account-img {
              height: 150px;
@@ -44,8 +18,10 @@
          }
 
          .content-section1 {
-             padding: 10px 150px;
-             margin-bottom: 20px;
+             padding: 30px 250px;
+             border: 1px solid wheat;
+             border-radius: 5px;
+             margin-bottom: 20px
          }
 
          .mobile {
@@ -53,69 +29,72 @@
              top: 25px;
              left: 0;
          }
-
-         h6 {
-             margin-right: 100px;
-         }
-
-         h5 {
-             border: 1px solid #dddddd;
-             background-color: #efefef;
-             border-radius: 5px;
-             width: 100%;
-             height: 30px;
-             margin-right: 100px;
-         }
-
          .account-heading {
              font-size: 2.5rem;
+             position: relative;
+             bottom: 5px;
          }
 
          .top-menu, .top-menu:hover, .top-menu:visited {
              font-size: 12pt;
-             margin: 0 0 0 5px;
+             margin: 0 0 0 -55px;
+         }
+         .email {
+             position: relative;
+             right: 200px;
+         }
+         .gear {
+             position: relative;
+             top: 0;
+
          }
      }
-         .account-bio {
-             margin: 10px 0 0 10px;
-             width: 250px;
-             height: 100px;
-             border: 1px solid #dddddd;
-             border-radius: 5px;
-             background-color: #efefef;
+     @media(min-width: 320px) {
+         .account-img {
+             height: 25%;
+             width: 25%;
+
+         }
+         .email {
+             position: relative;
+             top: 40px;
+             right: 140px;
+         }
+         .gear {
+             position: relative;
+             bottom: 40px;
+             left: 80px;
          }
 
-         .account {
-             margin: 10px 0 0 10px;
+     }
+     @media(max-width: 320px) {
+         .email {
+             position: relative;
+             right: 100px;
          }
+
+     }
 
     </style>
     <h2>Profile</h2>
     <div class="content-section1">
+    <div class="mobile">
       <div class="media">
         <img class="rounded-circle account-img img-responsive thumbnail" src="{{ user.profile.get_photo_url }}" alt="img">
-    <div class="media-body">
     <h4 class="account-heading"><em>{{ user.username }}</em>
-          <a class="btn btn-secondary top-menu" type="submit" href="{% url 'users:edit_profile' %}">
+          <a class="btn btn-secondary top-menu gear" type="submit" href="{% url 'users:edit_profile' %}">
               <img src="{% static 'images/settings.png' %}" alt="" width="32" height="32" class="fa-gear">
           </a></h4>
-      <p class="text-secondary">{{ user.email }}</p>
-    <em><h6 class="account">About myself</h6></em>
-        <p class="account-bio text-muted">{{ user.profile.about_myself }}</p>
+    <p class="text-secondary email">{{ user.email }}</p>
 {% endblock page_header %}
 
 {% block content %}
-    <div class="mobile">
-        <em><h6>First name</h6></em>
-          <h5 class="name-pos">{{ user.first_name }}</h5>
-            <em><h6>Last name</h6></em>
-              <h5 class="name-pos">{{ user.last_name }}</h5>
-                <em><h6>Date of birth</h6></em>
-                    {% if user.profile.date_of_birth == None %}
-                       <h5 class="name-pos"></h5>
-                    {% else %}
-                        <h5 class="name-pos">{{ user.profile.date_of_birth }}</h5>
-                    {% endif %}
+    <div class="media-body">
+    <form action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form user_form %}
+        {% bootstrap_form profile_form %}
+    </form>
     </div>
     </div>
       </div>
