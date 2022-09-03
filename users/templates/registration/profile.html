@@ -11,8 +11,8 @@
     }
      @media(min-width: 1280px) {
          .account-img {
-             height: 150px;
-             width: 150px;
+             height: 25%;
+             width: 25%;
              margin-right: 20px;
              margin-bottom: 16px;
          }
@@ -24,60 +24,31 @@
              margin-bottom: 20px
          }
 
-         .mobile {
-             position: relative;
-             top: 25px;
-             left: 0;
-         }
          .account-heading {
              font-size: 2.5rem;
-             position: relative;
-             bottom: 5px;
          }
 
          .top-menu, .top-menu:hover, .top-menu:visited {
              font-size: 12pt;
-             margin: 0 0 0 -30px;
-         }
-         .email {
-             position: relative;
-             left: -320px;
-             top: 30px;
-         }
-         .gear {
-             position: relative;
-             top: 20px;
-
-
+             margin: 0 0 0 0;
          }
      }
-     @media(min-width: 320px) {
+     @media (min-width: 320px) {
          .account-img {
-             height: 20%;
-             width: 20%;
-         }
-         .email {
-             position: relative;
-             right: 195px;
-             top: 40px;
-         }
-         .gear {
-             position: relative;
-             left: 30px;
-             bottom:  75px;
+             height: 25%;
+             width: 25%;
          }
      }
     </style>
     <h2>Profile</h2>
     <div class="content-section1">
-    <div class="mobile">
       <div class="media">
         <img class="rounded-circle account-img img-responsive thumbnail" src="{{ user.profile.get_photo_url }}" alt="img">
     <h4 class="account-heading"><em>{{ user.username }}</em>
-          <a class="btn btn-secondary top-menu gear" type="submit" href="{% url 'users:edit_profile' %}">
+          <a class="btn btn-secondary top-menu" type="submit" href="{% url 'users:edit_profile' %}">
               <img src="{% static 'images/settings.png' %}" alt="" width="32" height="32" class="fa-gear">
           </a></h4>
-    <p class="text-secondary email">{{ user.email }}</p>
+
 {% endblock page_header %}
 
 {% block content %}
@@ -89,6 +60,5 @@
     </form>
     </div>
     </div>
-      </div>
     </div>
 {% endblock content %}
