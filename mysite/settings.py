@@ -126,7 +126,7 @@ LOGIN_URL = '/users/login'
 LOGIN_REDIRECT_URL = 'blog:post_index'
 LOGOUT_REDIRECT_URL = 'users:login'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
 
 # Social-Auth
 AUTHENTICATION_BACKENDS = (
