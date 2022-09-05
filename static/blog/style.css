@@ -56,6 +56,9 @@ footer {
     background-color: red; /* Цвет подчеркивания при появлении линии*/
     transition: width 0.7s;  /* Время эффекта */
 }
+.underline-one:hover {
+    text-decoration: none;
+}
 .text-shadow {
     -webkit-text-shadow: 8px -8px 5px rgba(0, 0, 0, 0.31);
     -moz-text-shadow: 8px -8px 5px rgba(0, 0, 0, 0.31);

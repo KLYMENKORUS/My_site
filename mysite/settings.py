@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-e-)j89^_g$y3dzjeskoohn4vs12!x=(@jyr9p(@o6534ew!%yu"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['itblog-13.herokuapp.com', '127.0.0.1', 'localhost']
 
 # Application definition
@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "taggit",
     "social_django",
     "users.apps.UsersConfig",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -112,6 +113,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# AWS
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -127,8 +129,10 @@ EMAIL_USE_TLS = True
 LOGIN_URL = '/users/login'
 LOGIN_REDIRECT_URL = 'blog:post_index'
 LOGOUT_REDIRECT_URL = 'users:login'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Social-Auth
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
