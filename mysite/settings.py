@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     "taggit",
     "social_django",
     "users.apps.UsersConfig",
-    "storages",
+    #"storages",
 ]
 
 MIDDLEWARE = [
@@ -132,22 +132,22 @@ LOGIN_REDIRECT_URL = 'blog:post_index'
 LOGOUT_REDIRECT_URL = 'users:login'
 
 # Settings AWS
-AWS_S3_REGION_NAME ='eu-north-1'
-AWS_ACCESS_KEY_ID = 'AKIARNN6OM3LBKHAGYOG'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'itblog'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_REGION_NAME)
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
+#AWS_S3_REGION_NAME ='eu-north-1'
+#AWS_ACCESS_KEY_ID = 'AKIARNN6OM3LBKHAGYOG'
+#AWS_SECRET_ACCESS_KEY = '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'
+#AWS_STORAGE_BUCKET_NAME = 'itblog'
+#AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_REGION_NAME)
+#AWS_S3_OBJECT_PARAMETERS = {
+#    'CacheControl': 'max-age=86400',
+#}
 # media settings
-AWS_LOCATION = 'media'
-MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+#AWS_LOCATION = 'media'
+#MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 #STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#DEFAULT_FILE_STORAGE = 'storage_backends.MediaStorage'
 # AWS
-#MEDIA_URL = '/media/'
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Social-Auth
 AUTHENTICATION_BACKENDS = (
