@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-e-)j89^_g$y3dzjeskoohn4vs12!x=(@jyr9p(@o6534ew!%yu"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['itblog-13.herokuapp.com', '127.0.0.1', 'localhost']
 
 # Application definition
@@ -113,6 +113,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # AWS
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -130,8 +131,23 @@ LOGIN_URL = '/users/login'
 LOGIN_REDIRECT_URL = 'blog:post_index'
 LOGOUT_REDIRECT_URL = 'users:login'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Settings AWS
+AWS_S3_REGION_NAME ='eu-north-1'
+AWS_ACCESS_KEY_ID = 'AKIARNN6OM3LBKHAGYOG'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'itblog'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_REGION_NAME)
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+# media settings
+AWS_LOCATION = 'media'
+MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Social-Auth
 AUTHENTICATION_BACKENDS = (
