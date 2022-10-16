@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-e-)j89^_g$y3dzjeskoohn4vs12!x=(@jyr9p(@o6534ew!%yu"
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -122,7 +122,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'klimenkoruslan11@gmail.com'
+EMAIL_HOST_USER = 'user11@gmail.com'
 EMAIL_HOST_PASSWORD = 'tinjbgpuuvtedxpi'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -131,21 +131,6 @@ LOGIN_URL = '/users/login'
 LOGIN_REDIRECT_URL = 'blog:post_index'
 LOGOUT_REDIRECT_URL = 'users:login'
 
-# Settings AWS
-#AWS_S3_REGION_NAME ='eu-north-1'
-#AWS_ACCESS_KEY_ID = 'AKIARNN6OM3LBKHAGYOG'
-#AWS_SECRET_ACCESS_KEY = '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'
-#AWS_STORAGE_BUCKET_NAME = 'itblog'
-#AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_REGION_NAME)
-#AWS_S3_OBJECT_PARAMETERS = {
-#    'CacheControl': 'max-age=86400',
-#}
-# media settings
-#AWS_LOCATION = 'media'
-#MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-#DEFAULT_FILE_STORAGE = 'storage_backends.MediaStorage'
-# AWS
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -156,8 +141,8 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.instagram.InstagramOAuth2',)
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '814481666048-jpm1nvat8fol3821cmiepqpb5qnv6l0j.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 
 # Настройки Heroku
